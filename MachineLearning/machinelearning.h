@@ -1,9 +1,5 @@
 #pragma once
-#include <string>
-#include <array>
-#include <print>
-#include <random>
-#include <type_traits>
+#include "global.h"
 template<typename T>
 T getRandomNumber(T min, T max)
 {
