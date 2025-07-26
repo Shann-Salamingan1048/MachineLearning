@@ -1,27 +1,14 @@
 #pragma once
 #include "global.h"
 
-template<typename T>
-concept Number = requires { requires std::is_arithmetic_v<T>; };
-
-
-template<size_t size, typename Number>
+template<size_t size, Numeric Number>
 class Matrix
 {
 public:
 	Matrix()
 	{
-		if constexpr (std::is_integral_v<Number>)
-		{
-			for (auto& row : m_matrix)
-				row.fill(0);
-		}
-		else 
-		{
-			for (auto& row : m_matrix)
-				row.fill(0.0f);
-		}
-
+		for (auto& row : m_matrix)
+			row.fill(zero_init<Number>());
 	}
 
 	Matrix(std::initializer_list<std::initializer_list<Number>> init) noexcept
@@ -42,7 +29,7 @@ public:
 		}
 	}
 public:
-	Matrix operator+(const Matrix& other) const noexcept(noexcept (Number{} + Number{}))
+	Matrix operator+(const Matrix& other) const noexcept
 	{
 		Matrix result;
 		for (size_t i = 0; i < size; ++i) 
@@ -55,7 +42,7 @@ public:
 		return result;
 	}
 
-	Matrix operator+(Number scalar) const noexcept(noexcept(Number{} + Number{}))
+	Matrix operator+(Number scalar) const noexcept
 	{
 		Matrix result;
 		for (size_t i = 0; i < size; ++i)
@@ -68,7 +55,7 @@ public:
 		return result;
 	}
 public:
-	Matrix operator-(const Matrix& other) const noexcept(noexcept(Number{} - Number{}))
+	Matrix operator-(const Matrix& other) const noexcept
 	{
 		Matrix result;
 		for (size_t i = 0; i < size; ++i) 
@@ -81,7 +68,7 @@ public:
 		return result;
 	}
 
-	Matrix operator-(Number scalar) const noexcept(noexcept(Number{}- Number{}))
+	Matrix operator-(Number scalar) const noexcept
 	{
 		Matrix result;
 		for (size_t i = 0; i < size; ++i)
@@ -95,7 +82,7 @@ public:
 	}
 
 public:
-	Matrix operator*(Number scalar) const noexcept(noexcept(Number{} * Number{}))
+	Matrix operator*(Number scalar) const noexcept
 	{
 		Matrix result;
 		for (size_t i = 0; i < size; ++i)
@@ -107,7 +94,7 @@ public:
 		}
 		return result;
 	}
-	Matrix operator*(const Matrix& other) const noexcept(noexcept(Number{} * Number{}))
+	Matrix operator*(const Matrix& other) const noexcept
 	{
 		Matrix result;
 

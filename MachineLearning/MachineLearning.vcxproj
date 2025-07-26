@@ -132,6 +132,7 @@
     <ClInclude Include="machinelearning.h" />
     <ClInclude Include="MachineLearningPdfMath.h" />
     <ClInclude Include="Matrices.h" />
+    <ClInclude Include="Vectors.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

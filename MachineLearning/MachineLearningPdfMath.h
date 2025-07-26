@@ -1,29 +1,17 @@
 #pragma once
 #include "global.h"
 #include "Matrices.h"
-
+#include "Vectors.h"
 
 class MachineLearningPdfMath
 {
 public:
 	void Run()
 	{
-		const Matrix4di a = {
-			{1,2,3,4},
-			{5,6,7,4},
-			{14,2,3,21},
-			{54,2,3,3},
-		};
-		const Matrix4di b = {
-			{11,2,3,4},
-			{12,6,74,4},
-			{3,2,31,251},
-			{46,23,3,34},
-		};
-
-		const auto c = a * b;
-
-		printMatrix(c);
+		Vec4d v1{ 1,1,1,1 };
+		Vec4d v2{ 2,2,2,2 };
+		const auto result = v1 * v2;
+		printVec4(result);
 	}
 
 private:
