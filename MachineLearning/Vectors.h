@@ -1,7 +1,5 @@
 #pragma once
 #include "global.h"
-#pragma once
-#include "global.h"
 
 // Vec1
 template<Numeric Number>
