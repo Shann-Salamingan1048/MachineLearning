@@ -13,27 +13,41 @@ T getRandomNumber(T min, T max)
 	}
 }
 
-class MachineLearning // 33:44 / 2:31:06 Machine Learning in C (Episode1)
+class MachineLearning // 54:08 / 2:31:06 Machine Learning in C (Episode1)
 {
 public:
 	void Run()
 	{
-		const float w = getRandomNumber(1.0f, 10.0f);
-		
+	    float w = getRandomNumber(1.0f, 10.0f);
+		float b = getRandomNumber(1.0f, 5.0f);
 		const float eps = 1e-3;
-		std::println("cost: {}", cost(w));
-		std::println("cost: {}", cost(w - eps));
-		std::println("cost: {}", cost(w - eps * 2));
+		const float rate = 1e-3;
+
+		std::println("{}", cost(w,b));
+
+		const uint32_t repeat = 500;
+		for (size_t i = 0; i < repeat; ++i)
+		{
+			const float c = cost(w, b);
+			const float dw = (cost(w + eps, b) - c) / eps;
+			const float db = (cost(w, b + eps) - c) / eps;
+			w -= rate * dw;
+			b -= rate * db;
+			std::println("cost: {:.5f}, w: {:.5f}, b: {:.5f}", cost(w,b), w, b);
+		}
+		std::println("w: {:.5f}, b: {:.5f}", w, b);
+
+
 	}
 
 private:
-	constexpr static float cost(const float w) noexcept
+	constexpr static float cost(const float w, const float b) noexcept
 	{
 		float result = 0.0f;
 		for (const auto& point : m_train)
 		{
 			const float x = point[0];
-			const float y = x * w;
+			const float y = x * w + b;
 
 			const float d = y - point[1];
 			result += d * d;

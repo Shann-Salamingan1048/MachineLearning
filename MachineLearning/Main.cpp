@@ -3,10 +3,10 @@
 
 int main()
 {
-	//MachineLearning ml;
-	//ml.Run();
+	MachineLearning ml;
+	ml.Run();
 	
 
-	MachineLearningPdfMath mlpm;
-	mlpm.Run();
+	/*MachineLearningPdfMath mlpm;
+	mlpm.Run();*/
 }
